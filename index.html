@@ -2333,49 +2333,49 @@
 
             <!-- COMPUTE curve (peaks ~2022, falls) -->
             <path d="M 80,180 C 150,90 220,40 280,55 C 360,75 460,180 580,225"
-                  stroke="#CCCCCC" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="280" cy="55" r="4" fill="#A5A5A5"/>
+                  stroke="#B5B5B5" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="280" cy="55" r="4" fill="#B5B5B5"/>
             <!-- Compute label moved to upper-left clear area, with background halo -->
             <rect x="86" y="58" width="118" height="32" rx="4" fill="#0E0E0E" opacity="0.85"/>
-            <text x="92" y="74" fill="#A5A5A5" font-size="11" font-weight="700">COMPUTE</text>
-            <text x="92" y="86" fill="#A5A5A5" font-size="9" font-style="italic">peak: GPT-4 ~$100M</text>
+            <text x="92" y="74" fill="#B5B5B5" font-size="11" font-weight="700">COMPUTE</text>
+            <text x="92" y="86" fill="#B5B5B5" font-size="9" font-style="italic">peak: GPT-4 ~$100M</text>
 
             <!-- ALGORITHMS / inference curve (steep collapse) -->
             <path d="M 320,55 C 360,90 400,180 460,215 C 510,228 555,234 580,236"
-                  stroke="#8A8A8A" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 3"/>
-            <circle cx="460" cy="215" r="4" fill="#8A8A8A"/>
+                  stroke="#5E5E5E" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 3"/>
+            <circle cx="460" cy="215" r="4" fill="#5E5E5E"/>
             <!-- Algorithms label moved to mid clear area -->
             <rect x="220" y="118" width="138" height="32" rx="4" fill="#0E0E0E" opacity="0.85"/>
-            <text x="226" y="134" fill="#8A8A8A" font-size="11" font-weight="700">ALGORITHMS</text>
-            <text x="226" y="146" fill="#8A8A8A" font-size="9" font-style="italic">−280× in 18 mo</text>
+            <text x="226" y="134" fill="#5E5E5E" font-size="11" font-weight="700">ALGORITHMS</text>
+            <text x="226" y="146" fill="#5E5E5E" font-size="9" font-style="italic">−280× in 18 mo</text>
 
             <!-- DATA curve (rises sharply to high cost) -->
             <path d="M 80,235 C 200,228 280,210 360,180 C 430,140 490,95 560,60"
-                  stroke="#AAAAAA" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="560" cy="60" r="6" fill="#AAAAAA" stroke="#0E0E0E" stroke-width="2"/>
+                  stroke="#7DA8E0" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="560" cy="60" r="6" fill="#7DA8E0" stroke="#0E0E0E" stroke-width="2"/>
             <!-- DATA label with background halo -->
             <rect x="438" y="155" width="148" height="44" rx="4" fill="#0E0E0E" opacity="0.9"/>
-            <text x="446" y="172" fill="#AAAAAA" font-size="13" font-weight="800" letter-spacing="-0.01em">DATA</text>
-            <text x="446" y="186" fill="#AAAAAA" font-size="9" font-style="italic">$2–5K / labeled slide</text>
-            <text x="446" y="196" fill="#AAAAAA" font-size="9" font-style="italic">cannot commoditize</text>
+            <text x="446" y="172" fill="#7DA8E0" font-size="13" font-weight="800" letter-spacing="-0.01em">DATA</text>
+            <text x="446" y="186" fill="#7DA8E0" font-size="9" font-style="italic">$2–5K / labeled slide</text>
+            <text x="446" y="196" fill="#7DA8E0" font-size="9" font-style="italic">cannot commoditize</text>
 
             <!-- Owner labels at right edge -->
-            <line x1="430" y1="240" x2="430" y2="20" stroke="#AAAAAA" stroke-width="0.5" stroke-dasharray="2 4"/>
+            <line x1="430" y1="240" x2="430" y2="20" stroke="#7DA8E0" stroke-width="0.5" stroke-dasharray="2 4"/>
           </svg>
         </div>
 
         <!-- Compact legend / owner row -->
         <div style="margin-top: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; font-size: 10px;">
-          <div style="border-left: 3px solid #A5A5A5; padding: 4px 10px;">
-            <div style="color: #A5A5A5; font-weight: 700; letter-spacing: 0.1em;">COMPUTE</div>
+          <div style="border-left: 3px solid #B5B5B5; padding: 4px 10px;">
+            <div style="color: #B5B5B5; font-weight: 700; letter-spacing: 0.1em;">COMPUTE</div>
             <div style="color: var(--text-dim);">Owner: Nvidia rents it</div>
           </div>
-          <div style="border-left: 3px solid #8A8A8A; padding: 4px 10px;">
-            <div style="color: #8A8A8A; font-weight: 700; letter-spacing: 0.1em;">ALGORITHMS</div>
+          <div style="border-left: 3px solid #5E5E5E; padding: 4px 10px;">
+            <div style="color: #5E5E5E; font-weight: 700; letter-spacing: 0.1em;">ALGORITHMS</div>
             <div style="color: var(--text-dim);">Owner: nobody (open weights)</div>
           </div>
-          <div style="border-left: 3px solid #AAAAAA; padding: 4px 10px;">
-            <div style="color: #AAAAAA; font-weight: 700; letter-spacing: 0.1em;">DATA · NOW</div>
+          <div style="border-left: 3px solid #7DA8E0; padding: 4px 10px;">
+            <div style="color: #7DA8E0; font-weight: 700; letter-spacing: 0.1em;">DATA · NOW</div>
             <div style="color: var(--text-dim);">Owner: whoever runs the lab</div>
           </div>
         </div>
