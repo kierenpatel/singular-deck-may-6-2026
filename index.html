@@ -733,6 +733,34 @@
     opacity: 0;
     transform: scale(0);
   }
+  .lever-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .lever-particle {
+    position: absolute;
+    bottom: -1.5px;
+    left: 0;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 5px var(--accent-glow), 0 0 10px var(--accent-glow);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .lever-exit-beam {
+    position: absolute;
+    bottom: 4px;
+    left: 24px;
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to top, var(--accent), transparent);
+    box-shadow: 0 0 8px var(--accent-glow);
+    opacity: 0;
+    pointer-events: none;
+  }
 
   /* ----- BRIDGE (slide 4) ----- */
   .bridge {
@@ -1397,12 +1425,20 @@
     <div class="lever-rail" aria-hidden="true">
       <div class="lever-spine"></div>
       <div class="lever-spine-fill"></div>
-      <div class="lever"><span class="lever-label">Legal</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
-      <div class="lever"><span class="lever-label">Product</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
-      <div class="lever"><span class="lever-label">Scale</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
-      <div class="lever"><span class="lever-label">IPO</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
-      <div class="lever"><span class="lever-label">Spatial</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
-      <div class="lever"><span class="lever-label">AI</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
+      <div class="lever-particles">
+        <div class="lever-particle"></div>
+        <div class="lever-particle"></div>
+        <div class="lever-particle"></div>
+        <div class="lever-particle"></div>
+        <div class="lever-particle"></div>
+        <div class="lever-particle"></div>
+      </div>
+      <div class="lever"><span class="lever-label" data-final="Legal">Legal</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
+      <div class="lever"><span class="lever-label" data-final="Product">Product</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
+      <div class="lever"><span class="lever-label" data-final="Scale">Scale</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
+      <div class="lever"><span class="lever-label" data-final="IPO">IPO</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
+      <div class="lever"><span class="lever-label" data-final="Spatial">Spatial</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
+      <div class="lever last"><span class="lever-label" data-final="AI">AI</span><span class="lever-tick"></span><span class="lever-dot"></span><span class="lever-exit-beam"></span></div>
     </div>
     <div class="reel">
       <div class="reel-col rev">
@@ -2410,27 +2446,30 @@
             <line x1="60" y1="120" x2="580" y2="120" stroke="#2A2A2A" stroke-width="0.5" stroke-dasharray="2 4"/>
             <line x1="60" y1="70"  x2="580" y2="70"  stroke="#2A2A2A" stroke-width="0.5" stroke-dasharray="2 4"/>
 
-            <text x="55" y="273" fill="#ECECEC" font-size="11" font-weight="600" text-anchor="end" font-family="JetBrains Mono">$0</text>
-            <text x="55" y="223" fill="#ECECEC" font-size="11" font-weight="600" text-anchor="end" font-family="JetBrains Mono">$15B</text>
-            <text x="55" y="173" fill="#ECECEC" font-size="11" font-weight="600" text-anchor="end" font-family="JetBrains Mono">$30B</text>
-            <text x="55" y="123" fill="#ECECEC" font-size="11" font-weight="600" text-anchor="end" font-family="JetBrains Mono">$45B</text>
-            <text x="55" y="73"  fill="#ECECEC" font-size="11" font-weight="600" text-anchor="end" font-family="JetBrains Mono">$60B</text>
+            <text x="55" y="273" fill="#F5F5F5" font-size="12" font-weight="700" text-anchor="end" font-family="JetBrains Mono">$0</text>
+            <text x="55" y="223" fill="#F5F5F5" font-size="12" font-weight="700" text-anchor="end" font-family="JetBrains Mono">$15B</text>
+            <text x="55" y="173" fill="#F5F5F5" font-size="12" font-weight="700" text-anchor="end" font-family="JetBrains Mono">$30B</text>
+            <text x="55" y="123" fill="#F5F5F5" font-size="12" font-weight="700" text-anchor="end" font-family="JetBrains Mono">$45B</text>
+            <text x="55" y="73"  fill="#F5F5F5" font-size="12" font-weight="700" text-anchor="end" font-family="JetBrains Mono">$60B</text>
 
-            <text x="80"  y="290" fill="#ECECEC" font-size="11" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">2020</text>
-            <text x="180" y="290" fill="#ECECEC" font-size="11" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">2023</text>
-            <text x="280" y="290" fill="#ECECEC" font-size="11" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">2025</text>
-            <text x="400" y="290" fill="#ECECEC" font-size="11" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">2027</text>
-            <text x="540" y="290" fill="#C2C2C2" font-size="11" font-weight="800" text-anchor="middle" font-family="JetBrains Mono">2030</text>
+            <text x="80"  y="290" fill="#F5F5F5" font-size="12" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">2020</text>
+            <text x="180" y="290" fill="#F5F5F5" font-size="12" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">2023</text>
+            <text x="280" y="290" fill="#F5F5F5" font-size="12" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">2025</text>
+            <text x="400" y="290" fill="#F5F5F5" font-size="12" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">2027</text>
+            <text x="540" y="290" fill="#F5F5F5" font-size="13" font-weight="800" text-anchor="middle" font-family="JetBrains Mono">2030</text>
 
-            <!-- CAR-T (orange, behind) -->
+            <!-- CAR-T (behind) -->
             <path d="M 80,265 L 180,260 L 280,247 L 400,210 L 540,165 L 540,270 L 80,270 Z" fill="url(#cartFill)" stroke="#AAAAAA" stroke-width="1.5"/>
-            <text x="500" y="195" fill="#AAAAAA" font-size="11" font-weight="700" text-anchor="middle">CAR-T — $16–30B</text>
+            <rect x="438" y="184" width="124" height="20" rx="4" fill="#0E0E0E" opacity="0.88"/>
+            <text x="500" y="198" fill="#F5F5F5" font-size="12" font-weight="700" text-anchor="middle">CAR-T — $16–30B</text>
 
-            <!-- ADC (mint, foreground) -->
+            <!-- ADC (foreground) -->
             <path d="M 80,265 L 180,253 L 280,233 L 400,180 L 540,90 L 540,270 L 80,270 Z" fill="url(#adcFill)" stroke="#C2C2C2" stroke-width="2"/>
-            <text x="430" y="155" fill="#C2C2C2" font-size="13" font-weight="800" text-anchor="middle">ADC — $24–50B</text>
-            <circle cx="280" cy="233" r="4" fill="#C2C2C2" stroke="#0E0E0E" stroke-width="1"/>
-            <text x="295" y="226" fill="#C2C2C2" font-size="10" font-weight="600">Trodelvy ‘25 • $1.4B</text>
+            <rect x="362" y="139" width="136" height="22" rx="4" fill="#0E0E0E" opacity="0.9"/>
+            <text x="430" y="155" fill="#FFFFFF" font-size="13.5" font-weight="800" text-anchor="middle" letter-spacing="-0.01em">ADC — $24–50B</text>
+            <circle cx="280" cy="233" r="4.5" fill="#FFFFFF" stroke="#0E0E0E" stroke-width="1.5"/>
+            <rect x="290" y="214" width="142" height="18" rx="4" fill="#0E0E0E" opacity="0.88"/>
+            <text x="361" y="227" fill="#F5F5F5" font-size="11" font-weight="700" text-anchor="middle">Trodelvy '25 · $1.4B</text>
           </svg>
         </div>
         <div class="wv-legend" style="font-size: 11px; color: #ECECEC;">
@@ -6568,6 +6607,30 @@
     });
   }
 
+  // Glitch-decode reveal: scramble characters then settle left-to-right
+  function decodeText(el, finalText, duration = 0.7) {
+    if (el._decodeRaf) cancelAnimationFrame(el._decodeRaf);
+    const chars = Array.from(finalText);
+    const settleWindow = duration * 0.85;
+    const startTime = performance.now();
+    const randFor = (c) => {
+      if (/[0-9]/.test(c)) return '0123456789'[(Math.random() * 10) | 0];
+      if (/[A-Z]/.test(c)) return 'ABCDEFGHJKLMNPQRSTUVWXYZ'[(Math.random() * 24) | 0];
+      if (/[a-z]/.test(c)) return 'abcdefghjkmnpqrstuvwxyz'[(Math.random() * 23) | 0];
+      return c;
+    };
+    const tick = () => {
+      const elapsed = (performance.now() - startTime) / 1000;
+      if (elapsed >= duration) { el.textContent = finalText; el._decodeRaf = null; return; }
+      const settledCount = Math.floor((elapsed / settleWindow) * chars.length);
+      el.textContent = chars.map((c, i) =>
+        (i < settledCount || /[\s—·.→$+\/\-]/.test(c)) ? c : randFor(c)
+      ).join('');
+      el._decodeRaf = requestAnimationFrame(tick);
+    };
+    el._decodeRaf = requestAnimationFrame(tick);
+  }
+
   // Helper: draw SVG path on entrance
   function drawPath(path, duration = 1.4, delay = 0) {
     try {
@@ -6626,13 +6689,26 @@
 
     // 4b. Slide-3 lever rail — custom motion device, paces the 6-stop reel
     if (slide.id === 's-reel') {
-      const cols    = slide.querySelectorAll('.reel-col');
-      const tagline = slide.querySelector('.reel-tagline');
-      const rail    = slide.querySelector('.lever-rail');
-      const fill    = rail && rail.querySelector('.lever-spine-fill');
-      const labels  = rail ? rail.querySelectorAll('.lever-label') : [];
-      const ticks   = rail ? rail.querySelectorAll('.lever-tick')  : [];
-      const dots    = rail ? rail.querySelectorAll('.lever-dot')   : [];
+      const cols      = slide.querySelectorAll('.reel-col');
+      const tagline   = slide.querySelector('.reel-tagline');
+      const rail      = slide.querySelector('.lever-rail');
+      const fill      = rail && rail.querySelector('.lever-spine-fill');
+      const labels    = rail ? rail.querySelectorAll('.lever-label')    : [];
+      const ticks     = rail ? rail.querySelectorAll('.lever-tick')     : [];
+      const dots      = rail ? rail.querySelectorAll('.lever-dot')      : [];
+      const particles = rail ? rail.querySelectorAll('.lever-particle') : [];
+      const exitBeam  = rail && rail.querySelector('.lever-exit-beam');
+
+      // Pre-stash final text on data-final (lever labels have it from markup; reel nums need it)
+      // and clear visible text so decodeText can animate from blank-to-decoded
+      labels.forEach(l => { l.textContent = ''; });
+      cols.forEach(col => {
+        const n = col.querySelector('.reel-num');
+        if (n) {
+          if (!n.dataset.final) n.dataset.final = n.textContent.trim();
+          n.textContent = '';
+        }
+      });
 
       if (fill) {
         tl.fromTo(fill,
@@ -6640,38 +6716,79 @@
           { scaleX: 1, duration: 1.35, ease: 'power1.inOut' }, 0.55);
       }
 
+      // Particle drift along the spine — emit 6 staggered particles, each travels left-to-right
+      if (particles.length && rail) {
+        const railWidth = rail.offsetWidth || 1200;
+        particles.forEach((p, i) => {
+          const start = 0.50 + i * 0.18;
+          tl.fromTo(p,
+            { x: 0, opacity: 0 },
+            { x: railWidth - 3, opacity: 0.95, duration: 1.55, ease: 'power1.inOut' }, start);
+          tl.to(p, { opacity: 0, duration: 0.35, ease: 'power1.in' }, start + 1.30);
+        });
+      }
+
       cols.forEach((col, i) => {
         const t = 0.55 + i * 0.18;
+        // Column body fades up
         tl.fromTo(col,
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out', clearProps: 'transform' }, t);
-        if (labels[i]) tl.fromTo(labels[i],
-          { opacity: 0, y: -10 },
-          { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' }, t - 0.05);
+
+        // Lever label: drop in + decode-scramble its text
+        if (labels[i]) {
+          const final = labels[i].dataset.final || '';
+          tl.fromTo(labels[i],
+            { opacity: 0, y: -10 },
+            { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' }, t - 0.05);
+          gsap.delayedCall(t - 0.02, () => decodeText(labels[i], final, 0.55));
+        }
+        // Tick drops down
         if (ticks[i])  tl.fromTo(ticks[i],
           { scaleY: 0 },
           { scaleY: 1, duration: 0.3, ease: 'power2.out' }, t);
+        // Dot pops on the spine
         if (dots[i])   tl.fromTo(dots[i],
           { opacity: 0, scale: 0 },
           { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2.5)' }, t + 0.1);
+
+        // Reel number/text: decode-scramble reveal (replaces simple count-up)
         const num = col.querySelector('.reel-num');
-        if (num && /[0-9]/.test(num.textContent)) {
-          gsap.delayedCall(t + 0.2, () => countUp(num, num.textContent.trim(), 0.85));
+        if (num) {
+          const finalText = num.dataset.final || '';
+          // Cap decode duration based on string length so long text doesn't drag
+          const dur = Math.min(0.85, 0.35 + finalText.length * 0.022);
+          gsap.delayedCall(t + 0.10, () => decodeText(num, finalText, dur));
         }
       });
 
       // All-levers-engaged beat: every dot pulses together once the spine completes
       if (dots.length) {
         tl.to(dots,
-          { scale: 1.55, duration: 0.28, ease: 'power2.out', stagger: 0 }, 1.95)
+          { scale: 1.55, duration: 0.28, ease: 'power2.out' }, 1.95)
           .to(dots,
-          { scale: 1, duration: 0.5, ease: 'power2.out', stagger: 0 }, 2.20);
+          { scale: 1, duration: 0.5, ease: 'power2.out' }, 2.20);
+      }
+
+      // Spine glow-up at the all-engaged moment (brief overdrive)
+      if (fill) {
+        tl.to(fill, { opacity: 1.0, duration: 0.25, ease: 'power2.out' }, 1.95)
+          .to(fill, { opacity: 0.85, duration: 0.6, ease: 'power2.in' },  2.30);
+      }
+
+      // Exit beam — final column flourish (Modella → AstraZeneca)
+      if (exitBeam) {
+        tl.fromTo(exitBeam,
+          { height: 0, opacity: 0 },
+          { height: 36, opacity: 0.9, duration: 0.55, ease: 'power3.out' }, 2.00)
+          .to(exitBeam,
+          { opacity: 0, duration: 0.5, ease: 'power2.in' }, 2.65);
       }
 
       if (tagline) {
         tl.fromTo(tagline,
           { opacity: 0, y: 14 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 2.05);
+          { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 2.20);
       }
 
       // footer/chrome already handled; no SVG/stat-num content on this slide
