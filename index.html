@@ -1162,6 +1162,16 @@
   .slide.light svg text[fill="#757575"] { fill: #434343 !important; }
   .slide.light svg text[fill="#818181"] { fill: #434343 !important; }
 
+  /* ============ DEFENSIVE: inactive slides fully hidden ============ */
+  /* GSAP fade animations use fill-mode: both, which paints final state after
+     the animation ends. Without this guard, prior slides keep painting after
+     losing .active and bleed through under the current slide. */
+  .slide:not(.active) {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  .slide:not(.active) * { animation: none !important; }
+
 </style>
 </head>
 <body>
