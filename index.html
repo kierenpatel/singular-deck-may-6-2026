@@ -1264,6 +1264,22 @@
   }
   .slide:not(.active) * { animation: none !important; }
 
+
+  /* ----- REEL-NUM entrance glow (no count-up; replaces busy number ticking) ----- */
+  @keyframes reel-num-glow {
+    0%   { opacity: 0;   text-shadow: 0 0 0 transparent; transform: translateY(6px); filter: blur(1px); }
+    35%  { opacity: 1;   text-shadow: 0 0 18px rgba(125, 168, 224, 0.55), 0 0 4px rgba(125, 168, 224, 0.45); transform: translateY(0); filter: blur(0); }
+    100% { opacity: 1;   text-shadow: 0 0 0 transparent; transform: translateY(0); filter: blur(0); }
+  }
+  .slide.active #s-reel .reel-col .reel-num,
+  #s-reel.active .reel-col .reel-num { animation: reel-num-glow 1.0s cubic-bezier(.2,.8,.2,1) backwards; }
+  #s-reel.active .reel-col:nth-child(1) .reel-num { animation-delay: 0.45s; }
+  #s-reel.active .reel-col:nth-child(2) .reel-num { animation-delay: 0.60s; }
+  #s-reel.active .reel-col:nth-child(3) .reel-num { animation-delay: 0.75s; }
+  #s-reel.active .reel-col:nth-child(4) .reel-num { animation-delay: 0.90s; }
+  #s-reel.active .reel-col:nth-child(5) .reel-num { animation-delay: 1.05s; }
+  #s-reel.active .reel-col:nth-child(6) .reel-num { animation-delay: 1.20s; }
+
 </style>
 </head>
 <body>
@@ -1330,11 +1346,17 @@
       <div style="font-size: 10px; letter-spacing: 0.22em; color: var(--accent); font-weight: 800; padding: 4px 10px; background: rgba(194, 194, 194, 0.10); border: 1px solid var(--accent); border-radius: 4px;">I LEAD · FULL OWNERSHIP</div>
       <div style="flex: 1; height: 1px; background: linear-gradient(90deg, var(--accent), transparent);"></div>
     </div>
-    <div class="rev" style="margin-top: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1 1 0; min-height: 0; position: relative;">
-      <!-- Subtle pulsing accent dots between cards (motion) -->
-      <svg style="position: absolute; inset: 0; pointer-events: none; width: 100%; height: 100%; overflow: visible;" preserveAspectRatio="none" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="0.6" fill="#C2C2C2"><animate attributeName="opacity" values="0.3;0.85;0.3" dur="2.4s" repeatCount="indefinite"/></circle>
-      </svg>
+    <div class="rev lead-grid" style="margin-top: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1 1 0; min-height: 0; position: relative;">
+      <!-- Crosshair lane-network: central hub broadcasting along + axes to four lanes -->
+      <div class="lane-network" aria-hidden="true">
+        <div class="lane-axis lane-axis-h"></div>
+        <div class="lane-axis lane-axis-v"></div>
+        <div class="lane-hub"></div>
+        <div class="lane-ping" data-dir="up"></div>
+        <div class="lane-ping" data-dir="right"></div>
+        <div class="lane-ping" data-dir="down"></div>
+        <div class="lane-ping" data-dir="left"></div>
+      </div>
 
       <div style="background: var(--card); border: 1px solid var(--accent); border-radius: 8px; padding: 14px 18px; display: flex; gap: 14px; box-shadow: 0 6px 18px rgba(194, 194, 194, 0.08); position: relative; overflow: hidden;">
         <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); animation: lane-pulse 3.2s ease-in-out infinite;"></div>
@@ -1408,6 +1430,61 @@
         0%, 100% { opacity: 0.3; transform: scale(1); }
         50% { opacity: 0.85; transform: scale(1.4); }
       }
+      /* ----- Lane-network motion device (slide 3 / s-heard) ----- */
+      .lane-network {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .lane-axis {
+        position: absolute;
+        background: var(--accent);
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+      .lane-axis-h {
+        left: 0; right: 0; top: 50%;
+        height: 1px;
+        transform-origin: left center;
+        transform: scaleX(0);
+      }
+      .lane-axis-v {
+        top: 0; bottom: 0; left: 50%;
+        width: 1px;
+        transform-origin: center top;
+        transform: scaleY(0);
+      }
+      .lane-hub {
+        position: absolute;
+        top: 50%; left: 50%;
+        width: 8px; height: 8px;
+        margin: -4px 0 0 -4px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
+        opacity: 0;
+        transform: scale(0);
+        will-change: transform, opacity, box-shadow;
+      }
+      .lane-hub.live {
+        animation: hub-breath 2.4s ease-in-out infinite;
+      }
+      @keyframes hub-breath {
+        0%, 100% { transform: scale(1);   opacity: 0.85; }
+        50%      { transform: scale(1.35); opacity: 1; }
+      }
+      .lane-ping {
+        position: absolute;
+        top: 50%; left: 50%;
+        width: 4px; height: 4px;
+        margin: -2px 0 0 -2px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 6px var(--accent-glow), 0 0 14px var(--accent-glow);
+        opacity: 0;
+        will-change: transform, opacity;
+      }
     </style>
 
     <div class="footer">
@@ -1422,24 +1499,6 @@
     <div class="pagenum">03 / 17</div>
     <h2 class="title rev">Patent law to AI exit.</h2>
     <p class="subtitle rev">Thirty seconds of context, then we move to the work.</p>
-    <div class="lever-rail" aria-hidden="true">
-      <div class="lever-spine"></div>
-      <div class="lever-spine-fill"></div>
-      <div class="lever-particles">
-        <div class="lever-particle"></div>
-        <div class="lever-particle"></div>
-        <div class="lever-particle"></div>
-        <div class="lever-particle"></div>
-        <div class="lever-particle"></div>
-        <div class="lever-particle"></div>
-      </div>
-      <div class="lever"><span class="lever-label" data-final="Legal">Legal</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
-      <div class="lever"><span class="lever-label" data-final="Product">Product</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
-      <div class="lever"><span class="lever-label" data-final="Scale">Scale</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
-      <div class="lever"><span class="lever-label" data-final="IPO">IPO</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
-      <div class="lever"><span class="lever-label" data-final="Spatial">Spatial</span><span class="lever-tick"></span><span class="lever-dot"></span></div>
-      <div class="lever last"><span class="lever-label" data-final="AI">AI</span><span class="lever-tick"></span><span class="lever-dot"></span><span class="lever-exit-beam"></span></div>
-    </div>
     <div class="reel">
       <div class="reel-col rev">
         <div class="reel-co">Wilson Sonsini</div>
@@ -4322,7 +4381,7 @@
     <div style="margin-top: 14px; display: grid; grid-template-columns: 1.05fr 1.4fr; gap: 16px; flex: 1; min-height: 0;">
       <!-- LEFT: data-network image -->
       <div style="background: #161616; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; position: relative; display: flex; flex-direction: column;">
-        <img src="https://files.catbox.moe/fo3zzg.png" alt="Fragmented cohort archives connected by data network" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <img src="https://files.catbox.moe/fo3zzg.png" alt="Fragmented cohort archives connected by data network" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: hue-rotate(90deg) saturate(0.85);">
         <div style="position: absolute; top: 12px; left: 12px; background: rgba(14, 14, 14, 0.85); padding: 6px 10px; border-radius: 4px; font-size: 9px; letter-spacing: 0.16em; color: var(--accent); font-weight: 700; backdrop-filter: blur(6px);">
           THE COHORT GAP · 2026
         </div>
@@ -6687,112 +6746,51 @@
         { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.45);
     }
 
-    // 4b. Slide-3 lever rail — custom motion device, paces the 6-stop reel
-    if (slide.id === 's-reel') {
-      const cols      = slide.querySelectorAll('.reel-col');
-      const tagline   = slide.querySelector('.reel-tagline');
-      const rail      = slide.querySelector('.lever-rail');
-      const fill      = rail && rail.querySelector('.lever-spine-fill');
-      const labels    = rail ? rail.querySelectorAll('.lever-label')    : [];
-      const ticks     = rail ? rail.querySelectorAll('.lever-tick')     : [];
-      const dots      = rail ? rail.querySelectorAll('.lever-dot')      : [];
-      const particles = rail ? rail.querySelectorAll('.lever-particle') : [];
-      const exitBeam  = rail && rail.querySelector('.lever-exit-beam');
+    // 4b. Slide-3 (s-heard) — lane-network: crosshair draws across the 2x2 grid,
+    //     central hub appears + breathes, then radial pings loop forever.
+    if (slide.id === 's-heard') {
+      const grid = slide.querySelector('.lead-grid');
+      const net  = slide.querySelector('.lane-network');
+      if (grid && net) {
+        const axisH = net.querySelector('.lane-axis-h');
+        const axisV = net.querySelector('.lane-axis-v');
+        const hub   = net.querySelector('.lane-hub');
+        const pings = net.querySelectorAll('.lane-ping');
 
-      // Pre-stash final text on data-final (lever labels have it from markup; reel nums need it)
-      // and clear visible text so decodeText can animate from blank-to-decoded
-      labels.forEach(l => { l.textContent = ''; });
-      cols.forEach(col => {
-        const n = col.querySelector('.reel-num');
-        if (n) {
-          if (!n.dataset.final) n.dataset.final = n.textContent.trim();
-          n.textContent = '';
-        }
-      });
+        if (axisH) tl.to(axisH,
+          { scaleX: 1, opacity: 0.22, duration: 0.85, ease: 'power2.inOut' }, 0.55);
+        if (axisV) tl.to(axisV,
+          { scaleY: 1, opacity: 0.22, duration: 0.85, ease: 'power2.inOut' }, 0.55);
+        if (hub) tl.to(hub,
+          { scale: 1, opacity: 0.85, duration: 0.45, ease: 'back.out(2.5)' }, 1.05);
 
-      if (fill) {
-        tl.fromTo(fill,
-          { scaleX: 0 },
-          { scaleX: 1, duration: 1.35, ease: 'power1.inOut' }, 0.55);
-      }
-
-      // Particle drift along the spine — emit 6 staggered particles, each travels left-to-right
-      if (particles.length && rail) {
-        const railWidth = rail.offsetWidth || 1200;
-        particles.forEach((p, i) => {
-          const start = 0.50 + i * 0.18;
-          tl.fromTo(p,
-            { x: 0, opacity: 0 },
-            { x: railWidth - 3, opacity: 0.95, duration: 1.55, ease: 'power1.inOut' }, start);
-          tl.to(p, { opacity: 0, duration: 0.35, ease: 'power1.in' }, start + 1.30);
+        // Continuous ambient pings — start after entrance, loop forever
+        gsap.delayedCall(1.45, () => {
+          if (hub) hub.classList.add('live');
+          const w = grid.offsetWidth;
+          const h = grid.offsetHeight;
+          const reach = { up: -h/2 + 8, right: w/2 - 8, down: h/2 - 8, left: -w/2 + 8 };
+          pings.forEach((p, i) => {
+            const dir = p.dataset.dir;
+            const dx = (dir === 'left' || dir === 'right') ? reach[dir] : 0;
+            const dy = (dir === 'up'   || dir === 'down')  ? reach[dir] : 0;
+            // Kill any prior tweens on this element (re-entry safety)
+            gsap.killTweensOf(p);
+            gsap.set(p, { x: 0, y: 0, opacity: 0, scale: 1 });
+            gsap.to(p, {
+              keyframes: [
+                { opacity: 0,   x: 0,  y: 0,  scale: 1,    duration: 0    },
+                { opacity: 0.95,                            duration: 0.25 },
+                { opacity: 0,   x: dx, y: dy, scale: 0.55, duration: 2.45, ease: 'power1.in' }
+              ],
+              delay: i * 0.7,
+              repeat: -1,
+              repeatDelay: 1.4,
+              ease: 'none',
+            });
+          });
         });
       }
-
-      cols.forEach((col, i) => {
-        const t = 0.55 + i * 0.18;
-        // Column body fades up
-        tl.fromTo(col,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out', clearProps: 'transform' }, t);
-
-        // Lever label: drop in + decode-scramble its text
-        if (labels[i]) {
-          const final = labels[i].dataset.final || '';
-          tl.fromTo(labels[i],
-            { opacity: 0, y: -10 },
-            { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' }, t - 0.05);
-          gsap.delayedCall(t - 0.02, () => decodeText(labels[i], final, 0.55));
-        }
-        // Tick drops down
-        if (ticks[i])  tl.fromTo(ticks[i],
-          { scaleY: 0 },
-          { scaleY: 1, duration: 0.3, ease: 'power2.out' }, t);
-        // Dot pops on the spine
-        if (dots[i])   tl.fromTo(dots[i],
-          { opacity: 0, scale: 0 },
-          { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2.5)' }, t + 0.1);
-
-        // Reel number/text: decode-scramble reveal (replaces simple count-up)
-        const num = col.querySelector('.reel-num');
-        if (num) {
-          const finalText = num.dataset.final || '';
-          // Cap decode duration based on string length so long text doesn't drag
-          const dur = Math.min(0.85, 0.35 + finalText.length * 0.022);
-          gsap.delayedCall(t + 0.10, () => decodeText(num, finalText, dur));
-        }
-      });
-
-      // All-levers-engaged beat: every dot pulses together once the spine completes
-      if (dots.length) {
-        tl.to(dots,
-          { scale: 1.55, duration: 0.28, ease: 'power2.out' }, 1.95)
-          .to(dots,
-          { scale: 1, duration: 0.5, ease: 'power2.out' }, 2.20);
-      }
-
-      // Spine glow-up at the all-engaged moment (brief overdrive)
-      if (fill) {
-        tl.to(fill, { opacity: 1.0, duration: 0.25, ease: 'power2.out' }, 1.95)
-          .to(fill, { opacity: 0.85, duration: 0.6, ease: 'power2.in' },  2.30);
-      }
-
-      // Exit beam — final column flourish (Modella → AstraZeneca)
-      if (exitBeam) {
-        tl.fromTo(exitBeam,
-          { height: 0, opacity: 0 },
-          { height: 36, opacity: 0.9, duration: 0.55, ease: 'power3.out' }, 2.00)
-          .to(exitBeam,
-          { opacity: 0, duration: 0.5, ease: 'power2.in' }, 2.65);
-      }
-
-      if (tagline) {
-        tl.fromTo(tagline,
-          { opacity: 0, y: 14 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 2.20);
-      }
-
-      // footer/chrome already handled; no SVG/stat-num content on this slide
-      return;
     }
 
     // 5. Body content — staggered up-fade with slight scale
@@ -6805,7 +6803,7 @@
     }
 
     // 6. Count up any "stat-num" or eligible big-number element
-    const heroNums = slide.querySelectorAll('.stat-num, .stat-num em, .prod-cover .prod-num, .reel-col .reel-num');
+    const heroNums = slide.querySelectorAll('.stat-num, .stat-num em, .prod-cover .prod-num');
     heroNums.forEach((el, i) => {
       const final = el.textContent.trim();
       if (/[0-9]/.test(final) && final.length < 16) {
